@@ -11,8 +11,7 @@ oncreate
         setContentView(binding.root)
 
 
-        // Initialize the AppUpdateManager
-//        appUpdateManager = AppUpdateManagerFactory.create(this)
+        // Initialize the InAppUpdateManager
         appUpdateManagerLib = InAppUpdateManager(this)
 
         // Register the activity result launcher

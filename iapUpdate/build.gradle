@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("maven-publish") // Apply the maven-publish plugin here
 }
 
 android {
@@ -9,7 +10,6 @@ android {
 
     defaultConfig {
         minSdk 24
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
@@ -42,8 +41,56 @@ dependencies {
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
 
-
-    //in-app update
+    // in-app update dependencies
     implementation 'com.google.android.play:app-update:2.1.0'
     implementation 'com.google.android.play:app-update-ktx:2.1.0'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.github.M-Hammad1980' // Your GitHub username
+            artifactId = 'iapUpdate' // The library name
+            version = '1.0.0' // The version you want to publish
+
+            // Publish the AAR file
+            afterEvaluate {
+                from components.release
+            }
+
+            // Optionally, configure the generated POM
+            pom {
+                name = 'iapUpdate'
+                description = 'A library for handling in-app updates'
+                url = 'https://github.com/M-Hammad1980/iapUpdate'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'M-Hammad1980'
+                        name = 'M Hammad'
+                        email = 'your.email@example.com'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/M-Hammad1980/iapUpdate.git'
+                    developerConnection = 'scm:git:ssh://github.com/M-Hammad1980/iapUpdate.git'
+                    url = 'https://github.com/M-Hammad1980/iapUpdate'
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri("$buildDir/repo")
+        }
+    }
 }

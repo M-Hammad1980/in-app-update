@@ -40,9 +40,11 @@ oncreate
                 showToast(getString(R.string.update_failed))
             }
         }
+
+	//remote version code must greater then current version		 
         updateLauncher?.let {
-            appUpdateManagerLib?.checkForUpdate(BuildConfig.VERSION_CODE,
-                getRemoteConfig()[version_for_update_Key].toInt(),
+            appUpdateManagerLib?.checkForUpdate(currentVersion = BuildConfig.VERSION_CODE,
+                remoteVersion = 2,
                 it, binding.root)
         }
     }

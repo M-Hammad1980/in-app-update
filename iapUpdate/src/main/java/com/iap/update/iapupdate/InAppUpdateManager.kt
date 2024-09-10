@@ -31,8 +31,8 @@ class InAppUpdateManager(
     ) {
         parentView = parent
         if (currentVersion < remoteVersion) {
-            val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
-            appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo ->
+            val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+            appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
                 if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
                     appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
                 ) {

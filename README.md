@@ -16,6 +16,7 @@ implementation 'com.github.M-Hammad1980:in-app-update:1.0.2'
 ```
 
 
+in activity class 
 ```
 private var appUpdateManagerLib: InAppUpdateManager? = null
 private var updateLauncher: ActivityResultLauncher<IntentSenderRequest> ?= null
